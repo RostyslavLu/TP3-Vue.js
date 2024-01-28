@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AddProductView from '../views/AddProductView.vue'
 import ProductView from '../views/ProductView.vue'
 import EditProductView from '../views/EditProductView.vue'
+import AboutView from '../views/AboutView.vue'
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: '/product-edit/:id',
     name: 'edit-product',
     component: EditProductView
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: AboutView
   }
 ]
 

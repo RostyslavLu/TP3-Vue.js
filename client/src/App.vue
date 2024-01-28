@@ -2,6 +2,7 @@
   <nav>
     <router-link to="/">Products</router-link>
     <router-link to="/add-product">Add Product</router-link>
+    <router-link to="/about">About</router-link>
   </nav>
   <router-view
     :inventory="inventory"
@@ -9,15 +10,20 @@
     :updateInv="updateInventory"
     :removeInv="removeInventory"
   />
+  <MainFooter />
 </template>
 
 <script>
 import ProductDataService from '@/services/ProductDataService'
+import MainFooter from '@/components/MainFooter.vue'
 export default {
   data () {
     return {
       inventory: []
     }
+  },
+  components: {
+    MainFooter
   },
   mounted () {
     ProductDataService.getAll()

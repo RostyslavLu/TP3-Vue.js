@@ -10,7 +10,7 @@
         </div>
         <div class="field">
           <label for="productDescription">Description</label>
-          <textarea id="productDescription" v-model="product.description" required></textarea>
+          <textarea id="productDescription" v-model="product.description" rows="6" required></textarea>
         </div>
         <div class="field">
           <label for="productPrice">Price</label>
@@ -30,14 +30,11 @@
             <option value="Other">Other</option>
           </select>
         </div>
-        <div class="btn"><button type="submit" @click="updateProduct">Update</button></div>
+        <div class="btn"><button type="submit" @click.prevent="updateProduct">Update</button></div>
       </form>
     </div>
     <div v-else class="field">
-      <h2>Product updated successfully!</h2>
-      <div class="btn-blue">
-        <router-link to="/">Back to Products</router-link>
-      </div>
+      <router-link to="/">Back to Products</router-link>
     </div>
   </section>
 </template>

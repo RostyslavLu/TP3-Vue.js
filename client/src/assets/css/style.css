@@ -209,3 +209,45 @@ nav>a:hover {
   gap: 10px;
   padding-left: 20px;
 }
+.about {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.about > address {
+  font-style: normal;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  text-align: center;
+  flex-basis: 40%;
+}
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  min-height: 100px;
+  min-width: 100%;
+}
+.social {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+[id="app"] {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+footer {
+  margin-top: auto;
+}
