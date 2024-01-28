@@ -1,4 +1,5 @@
 <template>
+  <h1 class="header">Add Product</h1>
   <div class="add-product">
     <div class="message">{{ message }}</div>
     <div v-if="!submitted">
@@ -21,15 +22,23 @@
         </div>
         <div class="field">
           <label for="productCategory">Category</label>
-          <input type="text" id="productCategory" v-model="product.category" required />
+          <select id="productCategory" v-model="product.category" required>
+            <option value="Electronics">Electronics</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Food">Food</option>
+            <option value="Toys">Toys</option>
+            <option value="Other">Other</option>
+          </select>
         </div>
         <div class="btn"><button type="submit" @click="saveProduct">Add Product</button></div>
       </form>
     </div>
-    <div v-else>
+    <div v-else class="field">
       <h2>Product added successfully!</h2>
-      <button class="btn" @click="submitted = false">Add Another</button>
-      <router-link to="/">Back to Products</router-link>
+      <div class="btn"><button @click="submitted = false">Add Another</button></div>
+      <div class="btn-blue">
+        <router-link to="/">Back to Products</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -46,7 +55,7 @@ export default {
         name: '',
         description: '',
         price: '',
-        photo: '',
+        photo: 'https://dummyimage.com/640x360/fff/aaa',
         category: ''
       }
     }

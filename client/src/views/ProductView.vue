@@ -1,45 +1,61 @@
 <template>
-  <header>
-    <div class="add-product">
-      <button @click="toggleAddProduct">Add Product</button>
-      <AddProduct v-if="showAddProduct" :add="add" />
+  <div class="content">
+    <h2><router-link to="/">Return</router-link></h2>
+    <section class="product-card">
+      <picture>
+        <source v-if="product" :srcset="product.photo" type="image/webp">
+        <img v-if="product" :src="product.photo" alt="Productphoto">
+      </picture>
+      <div class="product-info">
+        <h2 v-if="product">{{ product.name }}</h2>
+        <p v-if="product" class="price">$&nbsp;{{ product.price }}</p>
+        <p v-if="product">{{ product.category }}</p>
+        <p v-if="product">{{ product.description }}</p>
+      </div>
+    </section>
+    <div class="controls">
+      <div class="btn-edit">
+        <router-link v-if="product" :to="{ name: 'edit-product', params: { id: product.id }}" class="btn">Edit</router-link>
+      </div>
+      <div class="btn-del"><button @click="deleteProduct">Delete</button></div>
     </div>
-  </header>
-  <section class="products">
-    <div v-for="product in products" :key="product.id" class="card">
-      <img src="https://placehold.co/600x400" :alt="product.name" style="width:100%">
-      <h2>{{ product.name }}</h2>
-      <p class="price">$&nbsp;{{ product.price }}</p>
-      <p>{{ product.category }}</p>
-    </div>
-  </section>
+  </div>
 </template>
 
 <script>
 import ProductDataService from '@/services/ProductDataService'
-import AddProduct from '@/components/AddProduct.vue'
 export default {
-  name: 'ProductView',
-  props: ['add', 'inv'],
-  components: {
-    AddProduct
-  },
+  props: ['inventory', 'removeInv'],
   data () {
     return {
-      showAddProduct: false,
-      products: []
+      id: parseInt(this.$route.params.id)
+    }
+  },
+  computed: {
+    product () {
+      const product = this.inventory.find((p) => {
+        return p.id === Number(this.$route.params.id)
+      })
+      return product
+    },
+    index () {
+      const index = this.inventory.findIndex((p) => {
+        return p.id === Number(this.$route.params.id)
+      })
+      return index
     }
   },
   methods: {
-    toggleAddProduct () {
-      this.showAddProduct = !this.showAddProduct
+    deleteProduct () {
+      ProductDataService.delete(this.id)
+        .then(response => {
+          this.removeInv(this.index)
+          this.$router.push({ name: 'home' })
+        })
+        .catch(e => {
+          console.log(e)
+        })
     }
-  },
-  mounted () {
-    ProductDataService.getAll()
-      .then(response => {
-        this.products = response.data
-      })
   }
 }
 </script>
